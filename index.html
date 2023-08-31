@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>Productos</h1>
+            <ul>
+                <li id="monitor">Monitor  <button onclick="agregarProductoDeseado('Monitor')">Agregar a la lista de deseados</button></li>
+                <li id="teclado">Teclado <button onclick="agregarProductoDeseado('Teclado')">Agregar a la lista de deseados</button></li>
+                <li id="mouse">Mouse <button onclick="agregarProductoDeseado('Mouse')">Agregar a la lista de deseados</button></li>
+                <li id="impresora">Impresora <button onclick="agregarProductoDeseado('Impresora')">Agregar a la lista de deseados</button></li>
+                <li id="pc">Pc Escritorio <button onclick="agregarProductoDeseado('PC Escritorio')">Agregar a la lista de deseados</button></li>
+            </ul>
+        </section>
+        <br>
+        <section>
+            <h1>Lista de Deseados</h1>
+            <ul id="productosDeseados"></ul>
+        </section>
+    </main>
+
+    <script>
+        const productosDeseados = new Set();
+
+        function agregarProductoDeseado(nombreProducto){
+            if(!productosDeseados.has(nombreProducto)){
+                const listaProductosDeseados = document.getElementById('productosDeseados');
+            
+                const nuevoProductoDeseado = document.createElement('li');
+                nuevoProductoDeseado.textContent = nombreProducto;
+
+                const botonEliminar = document.createElement('button');
+                botonEliminar.textContent = "Eliminar";
+                botonEliminar.onclick = function() {
+                    eliminarProductoDeseado(nuevoProductoDeseado);
+                };
+
+                nuevoProductoDeseado.appendChild(botonEliminar);
+
+                listaProductosDeseados.appendChild(nuevoProductoDeseado);
+                
+                productosDeseados.add(nombreProducto);
+
+            }
+            else {
+                alert("El producto ya existe en la lista de deseados");
+            }    
+        }
+
+        function eliminarProductoDeseado(producto){
+            const nombreProducto = producto.textContent;
+            productosDeseados.delete(nombreProducto);
+
+            const listaProductosDeseados = document.getElementById('productosDeseados');
+            listaProductosDeseados.removeChild(producto);
+        }
+    </script>
+</body>
+</html>
